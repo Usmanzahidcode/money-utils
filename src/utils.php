@@ -13,7 +13,7 @@ if (!function_exists('uz_add')) {
 if (!function_exists('uz_sub')) {
     function uz_sub(string $a, string $b): string {
         $result = bcsub($a, $b, UZ_CALCULATION_PRECISION);
-        return uz_round($result, UZ_ROUNDING_PRECISION);
+        return uz_round($result);
     }
 }
 
