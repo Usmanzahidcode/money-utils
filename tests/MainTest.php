@@ -17,7 +17,7 @@ class MainTest extends TestCase {
 
     public function testAddCaseOne() {
         $a = "1.00";
-        $b = "1.00";
+        $b = "1.00"; 
 
         $result = uz_add($a, $b);
         $this->assertEquals("2.00", $result);
