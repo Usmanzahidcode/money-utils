@@ -97,8 +97,8 @@ if (!function_exists('uz_tax')) {
      * @return string The calculated tax amount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_tax(string $amount, string $rate): string {
-        $tax = uz_mul($amount, $rate); // Multiply amount by the tax rate.
-        return uz_round($tax); // Round the result.
+        $tax = uz_mul($amount, $rate);
+        return uz_round($tax);
     }
 }
 
@@ -111,10 +111,8 @@ if (!function_exists('uz_discount')) {
      * @return string The amount after applying the discount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_discount(string $amount, string $rate): string {
-        // Calculate the discount amount.
         $discount = uz_mul($amount, $rate);
-        // Subtract the discount from the original amount.
         $amountAfterDiscount = uz_sub($amount, $discount);
-        return uz_round($amountAfterDiscount); // Round the result.
+        return uz_round($amountAfterDiscount);
     }
 }
