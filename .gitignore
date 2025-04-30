@@ -1,1 +1,14 @@
+# PhpStorm
+.idea/
+
+# Composer
 /vendor/
+
+# Logs
+*.log
+
+# Others
+*.tmp
+
+# Environment
+.env
