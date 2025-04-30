@@ -3,8 +3,8 @@
 require_once 'vendor/autoload.php';
 
 $amount = '0.015';
-$taxType = 'fixed';
-$taxValue = '0.015';
+$taxType = 'percentage';
+$taxValue = '100%';
 
 $result = uz_tax($amount, $taxType, $taxValue);
 
