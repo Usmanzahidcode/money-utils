@@ -8,7 +8,8 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Usmanzahid\\MoneyUtils\\": "src/"
+      "Usmanzahid\\MoneyUtils\\": "src/",
+      "UsmanZahid\\MoneyUtils\\Tests": "tests/"
     },
     "files": [
       "src/utils.php"
@@ -20,5 +21,8 @@
       "email": "developerusman@yahoo.com"
     }
   ],
-  "minimum-stability": "dev"
+  "minimum-stability": "stable",
+  "require-dev": {
+    "phpunit/phpunit": "^12.1"
+  }
 }
