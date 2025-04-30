@@ -2,9 +2,19 @@
 
 This package provides a set of utility functions to handle basic financial calculations in USD, ensuring high precision and safe handling of rounding errors.
 
+If you're building a financial module—like a subscription system—on top of an existing application, this utility is the simplest and most effective way to
+handle USD calculations. It avoids the bloat of full-scale money libraries and keeps your code clean, precise, and easy to maintain.
+
+Larger libraries often over-engineer solutions for basic needs, introducing unnecessary complexity for handling simple dollar amounts. This utility focuses on
+high-precision arithmetic, rounding safety, and common use cases like tax or discount calculations.
+
+If you eventually need advanced features or multi-currency support, libraries like Brick\Money might be worth exploring. But for most USD-only scenarios, this
+is all you need.
+
 ## Purpose
 
-The library ensures that you can perform essential arithmetic operations (addition, subtraction, multiplication, division) and financial calculations (tax, discount) without worrying about rounding errors or floating point inaccuracies. It’s perfect for simple USD-based financial calculations.
+Perform essential arithmetic operations (addition, subtraction, multiplication, division) and common financial calculations (tax, discount) without worrying
+about rounding errors or floating-point inaccuracies. Ideal for simple USD-based operations.
 
 ## Features
 
@@ -15,12 +25,15 @@ The library ensures that you can perform essential arithmetic operations (additi
 ## Use Cases
 
 This library is ideal for situations where you need basic calculations like:
+
 - E-commerce price calculations with tax and discount.
 - Simple financial calculations involving USD currency.
+- The only thing you must stay away from in financial calculations: Rounding at wrong step.
 
 ## Limitations
 
-This is not a full-featured money management system. If you need multi-currency support or advanced financial features, consider using a more comprehensive library like [Brick\Money](https://github.com/brick/money).
+This is not a full-featured money management system. If you need multi-currency support or advanced financial features, consider using a more comprehensive
+library like `Brick\Money`
 
 ## Conclusion
 
