@@ -1,40 +1,51 @@
-# Financial Calculations Utilities for USD
+# Financial Calculations Utilities
 
-This package provides a set of utility functions to handle basic financial calculations in USD, ensuring high precision and safe handling of rounding errors.
+Minimalist utilities for precise financial calculations with adjustable rounding precision.
 
-If you're building a financial module—like a subscription system—on top of an existing application, this utility is the simplest and most effective way to
-handle USD calculations. It avoids the bloat of full-scale money libraries and keeps your code clean, precise, and easy to maintain.
+### Why Use This?
 
-Larger libraries often over-engineer solutions for basic needs, introducing unnecessary complexity for handling simple dollar amounts. This utility focuses on
-high-precision arithmetic, rounding safety, and common use cases like tax or discount calculations.
+If you're building a system with USD calculations (e.g., subscriptions, checkout systems, invoicing), this package:
 
-If you eventually need advanced features or multi-currency support, libraries like Brick\Money might be worth exploring. But for most USD-only scenarios, this
-is all you need.
+- Prevents rounding errors.
+- Stays lightweight.
+- Keeps calculations predictable and clean.
+- You don’t need a full-blown money library for simple use cases — just reliable math.
 
-## Purpose
+### Features
 
-Perform essential arithmetic operations (addition, subtraction, multiplication, division) and common financial calculations (tax, discount) without worrying
-about rounding errors or floating-point inaccuracies. Ideal for simple USD-based operations.
+- High-precision arithmetic using bcmath
+- Safe, configurable rounding (uz_set_precision())
+- Helpers for tax and discount calculations
+- Currency-agnostic: works with any decimal-based currency
 
-## Features
+### Installation
 
-- **High Precision Calculations**: Avoid floating-point inaccuracies by using high precision arithmetic.
-- **Rounding**: Results are rounded to 2 decimal places (standard for USD).
-- **Basic Financial Calculations**: Includes functions for tax and discount calculations.
+```bash
+composer require usmanzahid/money-utils
+```
 
-## Use Cases
+### Usage
 
-This library is ideal for situations where you need basic calculations like:
+```php
+uz_set_precision(3); // Rounds to 3 decimal places
 
-- E-commerce price calculations with tax and discount.
-- Simple financial calculations involving USD currency.
-- The only thing you must stay away from in financial calculations: Rounding at wrong step.
+uz_add('10.257', '5.124'); 
+// "15.381"
 
-## Limitations
+uz_tax('100.00', 'percentage', '10%'); 
+// ['amount' => "100.000", 'tax' => "10.000", 'after_tax' => "110.000"]
 
-This is not a full-featured money management system. If you need multi-currency support or advanced financial features, consider using a more comprehensive
-library like `Brick\Money`
+uz_discount('200.00', 'rate', '0.255'); 
+// ['amount' => "200.000", 'discount' => "51.000", 'after_discount' => "149.000"]
 
-## Conclusion
+```
 
-For simple USD calculations without the headache of rounding or floating point errors, this library is a lightweight, reliable solution.
+### Note
+
+This library is not a full-featured money solution. Its primary goal is to abstract and safely handle rounding logic in financial calculations.
+
+Ensure consistency in the precision your system operates with. For example, if you're working with USD, enforce a precision of 2 decimal places. Introducing
+values with mismatched precision (e.g., 3 decimal places for USD) is a design flaw—not something any library can correct. Your system should enforce and
+validate precision strictly.
+
+For advanced setup requiring features like multi-currency support, formatting, or immutability, consider using the excellent `brick/money`.

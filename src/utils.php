@@ -30,8 +30,6 @@ if (!function_exists('uz_add')) {
      * @return string The result of adding $amountA and $amountB, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_add(string $amountA, string $amountB): string {
-        global $UZ_ROUNDING_PRECISION;
-
         $result = bcadd($amountA, $amountB, UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
@@ -46,8 +44,6 @@ if (!function_exists('uz_sub')) {
      * @return string The result of subtracting $amountB from $amountA, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_sub(string $amountA, string $amountB): string {
-        global $UZ_ROUNDING_PRECISION;
-
         $result = bcsub($amountA, $amountB, UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
@@ -62,8 +58,6 @@ if (!function_exists('uz_mul')) {
      * @return string The result of multiplying $amountA and $amountB, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_mul(string $amountA, string $amountB): string {
-        global $UZ_ROUNDING_PRECISION;
-
         $result = bcmul($amountA, $amountB, UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
@@ -79,8 +73,6 @@ if (!function_exists('uz_div')) {
      * @throws InvalidArgumentException if $amountB is zero.
      */
     function uz_div(string $amountA, string $amountB): string {
-        global $UZ_ROUNDING_PRECISION;
-
         if (bccomp($amountB, '0', UZ_CALCULATION_PRECISION)===0) {
             throw new \InvalidArgumentException('Division by zero.');
         }
@@ -125,8 +117,6 @@ if (!function_exists('uz_tax')) {
      * @return string The calculated tax amount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_tax(string $amount, string|TaxAmountType $taxAmountType, string $taxAmount): array {
-        global $UZ_ROUNDING_PRECISION;
-
         if (is_string($taxAmountType)) {
             $taxAmountType = TaxAmountType::tryFrom($taxAmountType);
             if (!$taxAmountType) {
@@ -169,8 +159,6 @@ if (!function_exists('uz_discount')) {
      * @return string The amount after applying the discount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_discount(string $amount, string|DiscountAmountType $discountAmountType, string $discountAmount): array {
-        global $UZ_ROUNDING_PRECISION;
-
         if (is_string($discountAmountType)) {
             $discountAmountType = DiscountAmountType::tryFrom($discountAmountType);
             if (!$discountAmountType) {
