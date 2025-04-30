@@ -3,8 +3,20 @@
 use Usmanzahid\MoneyUtils\Enums\DiscountAmountType;
 use Usmanzahid\MoneyUtils\Enums\TaxAmountType;
 
-const UZ_CALCULATION_PRECISION = 8; // For calculating at longer precision for better reliability.
-const UZ_ROUNDING_PRECISION = 2; // For rounding to 2 decimal places for USD
+const UZ_CALCULATION_PRECISION = 14; // For calculating at longer precision for better reliability.
+const UZ_ROUNDING_PRECISION = 2;
+
+if (!function_exists('uz_set_precision')) {
+    /**
+     * Set the precision for the final results (Default is 2 as per most currencies like USD need).
+     *
+     * @param int $precision The precision to use for final results.
+     * @return void
+     */
+    function uz_set_precision(int $precision): void {
+        $UZ_ROUNDING_PRECISION = $precision;
+    }
+}
 
 if (!function_exists('uz_add')) {
     /**
