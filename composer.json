@@ -1,0 +1,21 @@
+{
+    "name": "usmanzahid/money-utils",
+    "description": "A set of utilities for money calculations to be away from rounding errors.",
+    "type": "library",
+    "require": {
+        "ext-bcmath": "*"
+    },
+    "license": "MIT",
+    "autoload": {
+        "psr-4": {
+            "Usmanzahid\\MoneyUtils\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Usman Zahid",
+            "email": "developerusman@yahoo.com"
+        }
+    ],
+    "minimum-stability": "dev"
+}
