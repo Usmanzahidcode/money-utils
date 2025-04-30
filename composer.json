@@ -9,7 +9,7 @@
   "autoload": {
     "psr-4": {
       "Usmanzahid\\MoneyUtils\\": "src/",
-      "UsmanZahid\\MoneyUtils\\Tests": "tests/"
+      "UsmanZahid\\MoneyUtils\\Tests\\": "tests/"
     },
     "files": [
       "src/utils.php"
