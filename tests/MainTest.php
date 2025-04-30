@@ -1,6 +1,6 @@
 <?php
 
-namespace UsmanZahid\MoneyUtils\Tests;
+namespace Usmanzahid\MoneyUtils\Enums\Tests;
 
 use PHPUnit\Framework\TestCase;
 
