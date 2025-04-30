@@ -3,17 +3,19 @@
 use Usmanzahid\MoneyUtils\Enums\DiscountAmountType;
 use Usmanzahid\MoneyUtils\Enums\TaxAmountType;
 
-const UZ_CALCULATION_PRECISION = 14; // For calculating at longer precision for better reliability.
-const UZ_ROUNDING_PRECISION = 2;
+// Default Precision Variables (these can be changed dynamically)
+$UZ_CALCULATION_PRECISION = 14; // For calculating at longer precision for better reliability
+$UZ_ROUNDING_PRECISION = 2; // Default rounding precision
 
 if (!function_exists('uz_set_precision')) {
     /**
-     * Set the precision for the final results (Default is 2 as per most currencies like USD need).
+     * Set the precision for the final results.
      *
      * @param int $precision The precision to use for final results.
      * @return void
      */
     function uz_set_precision(int $precision): void {
+        global $UZ_ROUNDING_PRECISION;
         $UZ_ROUNDING_PRECISION = $precision;
     }
 }
@@ -27,7 +29,9 @@ if (!function_exists('uz_add')) {
      * @return string The result of adding $amountA and $amountB, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_add(string $amountA, string $amountB): string {
-        $result = bcadd($amountA, $amountB, UZ_CALCULATION_PRECISION);
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
+        $result = bcadd($amountA, $amountB, $UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
 }
@@ -41,7 +45,9 @@ if (!function_exists('uz_sub')) {
      * @return string The result of subtracting $amountB from $amountA, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_sub(string $amountA, string $amountB): string {
-        $result = bcsub($amountA, $amountB, UZ_CALCULATION_PRECISION);
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
+        $result = bcsub($amountA, $amountB, $UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
 }
@@ -55,7 +61,9 @@ if (!function_exists('uz_mul')) {
      * @return string The result of multiplying $amountA and $amountB, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_mul(string $amountA, string $amountB): string {
-        $result = bcmul($amountA, $amountB, UZ_CALCULATION_PRECISION);
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
+        $result = bcmul($amountA, $amountB, $UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
 }
@@ -70,10 +78,13 @@ if (!function_exists('uz_div')) {
      * @throws InvalidArgumentException if $amountB is zero.
      */
     function uz_div(string $amountA, string $amountB): string {
-        if (bccomp($amountB, '0', UZ_CALCULATION_PRECISION)===0) {
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
+        if (bccomp($amountB, '0', $UZ_CALCULATION_PRECISION)===0) {
             throw new \InvalidArgumentException('Division by zero.');
         }
-        $result = bcdiv($amountA, $amountB, UZ_CALCULATION_PRECISION);
+
+        $result = bcdiv($amountA, $amountB, $UZ_CALCULATION_PRECISION);
         return uz_round($result);
     }
 }
@@ -86,21 +97,20 @@ if (!function_exists('uz_round')) {
      * @return string The rounded number, with precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_round(string $amount): string {
-        $calculationPrecision = UZ_CALCULATION_PRECISION;
-        $roundingPrecision = UZ_ROUNDING_PRECISION;
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
 
         // Resolve the adjustment amount to handle rounding.
-        $adjustment = bcpow('10', (string) -$roundingPrecision, $roundingPrecision + 2);
-        $adjustment = bcdiv($adjustment, '2', $roundingPrecision + 2);
+        $adjustment = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
+        $adjustment = bcdiv($adjustment, '2', $UZ_ROUNDING_PRECISION + 2);
 
         // Adjust the amount based on the rounding logic.
-        if (bccomp($amount, '0', $calculationPrecision) >= 0) {
-            $rounded = bcadd($amount, $adjustment, $calculationPrecision);
+        if (bccomp($amount, '0', $UZ_CALCULATION_PRECISION) >= 0) {
+            $rounded = bcadd($amount, $adjustment, $UZ_CALCULATION_PRECISION);
         } else {
-            $rounded = bcsub($amount, $adjustment, $calculationPrecision);
+            $rounded = bcsub($amount, $adjustment, $UZ_CALCULATION_PRECISION);
         }
 
-        return bcadd($rounded, '0', $roundingPrecision);
+        return bcadd($rounded, '0', $UZ_ROUNDING_PRECISION);
     }
 }
 
@@ -114,6 +124,8 @@ if (!function_exists('uz_tax')) {
      * @return string The calculated tax amount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_tax(string $amount, string|TaxAmountType $taxAmountType, string $taxAmount): array {
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
         if (is_string($taxAmountType)) {
             $taxAmountType = TaxAmountType::tryFrom($taxAmountType);
             if (!$taxAmountType) {
@@ -123,11 +135,11 @@ if (!function_exists('uz_tax')) {
 
         switch ($taxAmountType) {
             case TaxAmountType::PERCENTAGE:
-                $rate = bcdiv(rtrim($taxAmount, '%'), '100', UZ_CALCULATION_PRECISION);
-                $tax = bcmul($amount, $rate, UZ_CALCULATION_PRECISION);
+                $rate = bcdiv(rtrim($taxAmount, '%'), '100', $UZ_CALCULATION_PRECISION);
+                $tax = bcmul($amount, $rate, $UZ_CALCULATION_PRECISION);
                 break;
             case TaxAmountType::RATE:
-                $tax = bcmul($amount, $taxAmount, UZ_CALCULATION_PRECISION);
+                $tax = bcmul($amount, $taxAmount, $UZ_CALCULATION_PRECISION);
                 break;
             case TaxAmountType::FIXED:
                 $tax = $taxAmount;
@@ -146,20 +158,6 @@ if (!function_exists('uz_tax')) {
     }
 }
 
-
-//[
-//    'amount' => '0.015',
-//    'tax' => [
-//        'raw' => '0.0015',
-//        'rounded' => '0.00',
-//    ],
-//    'after_tax' => [
-//        'raw' => '0.0165',
-//        'rounded' => '0.02',
-//    ]
-//]
-
-
 if (!function_exists('uz_discount')) {
     /**
      * Calculates the amount after applying a discount based on the specified rate.
@@ -170,6 +168,8 @@ if (!function_exists('uz_discount')) {
      * @return string The amount after applying the discount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
      */
     function uz_discount(string $amount, string|DiscountAmountType $discountAmountType, string $discountAmount): array {
+        global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
         if (is_string($discountAmountType)) {
             $discountAmountType = DiscountAmountType::tryFrom($discountAmountType);
             if (!$discountAmountType) {
@@ -179,18 +179,15 @@ if (!function_exists('uz_discount')) {
 
         switch ($discountAmountType) {
             case DiscountAmountType::PERCENTAGE:
-                $rate = bcdiv(rtrim($discountAmount, '%'), '100', UZ_CALCULATION_PRECISION);
-                $discount = bcmul($amount, $rate, UZ_CALCULATION_PRECISION);
+                $rate = bcdiv(rtrim($discountAmount, '%'), '100', $UZ_CALCULATION_PRECISION);
+                $discount = bcmul($amount, $rate, $UZ_CALCULATION_PRECISION);
                 break;
-
             case DiscountAmountType::RATE:
-                $discount = bcmul($amount, $discountAmount, UZ_CALCULATION_PRECISION);
+                $discount = bcmul($amount, $discountAmount, $UZ_CALCULATION_PRECISION);
                 break;
-
             case DiscountAmountType::FIXED:
                 $discount = $discountAmount;
                 break;
-
             default:
                 throw new \InvalidArgumentException("Invalid discount type: {$discountAmountType->value}");
         }
