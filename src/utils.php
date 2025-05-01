@@ -73,7 +73,7 @@ if (!function_exists('uz_div')) {
      * @throws InvalidArgumentException if $amountB is zero.
      */
     function uz_div(string $amountA, string $amountB): string {
-        if (bccomp($amountB, '0', UZ_CALCULATION_PRECISION)===0) {
+        if (bccomp($amountB, '0', UZ_CALCULATION_PRECISION) === 0) {
             throw new \InvalidArgumentException('Division by zero.');
         }
 
@@ -93,7 +93,7 @@ if (!function_exists('uz_round')) {
         global $UZ_ROUNDING_PRECISION;
 
         // Resolve the adjustment amount to handle rounding.
-        $adjustment = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
+        $adjustment = bcpow('10', (string)-$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
         $adjustment = bcdiv($adjustment, '2', $UZ_ROUNDING_PRECISION + 2);
 
         // Adjust the amount based on the rounding logic.
@@ -114,7 +114,7 @@ if (!function_exists('uz_tax')) {
      * @param string $amount The amount to calculate tax on.
      * @param string|TaxAmountType $taxAmountType The tax amount type (percentage: e.g., "10%", fixed: e.g., "3.02", rate: e.g., "0.10" for 10% rate).
      * @param string $taxAmount The tax amount (could be a percentage, fixed amount, or rate).
-     * @return string The calculated tax amount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
+     * @return array The calculated tax breakdown array with "amount", "tax" and "after_tax".
      */
     function uz_tax(string $amount, string|TaxAmountType $taxAmountType, string $taxAmount): array {
         if (is_string($taxAmountType)) {
@@ -156,7 +156,7 @@ if (!function_exists('uz_discount')) {
      * @param string $amount The amount to calculate the discount on.
      * @param string|DiscountAmountType $discountAmountType The discount amount type (percentage: e.g., "10%", fixed: e.g., "7.00", rate: e.g., "0.10" for 10% discount).
      * @param string $discountAmount The discount amount (could be a percentage, fixed amount, or rate).
-     * @return string The amount after applying the discount, rounded to the precision defined by UZ_ROUNDING_PRECISION.
+     * @return array The amount breakdown array with the "amount", "tax" and "after_tax".
      */
     function uz_discount(string $amount, string|DiscountAmountType $discountAmountType, string $discountAmount): array {
         if (is_string($discountAmountType)) {

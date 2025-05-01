@@ -16,7 +16,7 @@ $result = uz_tax($amount, $taxType, $taxValue);
 
 print_r($result);
 
-uz_set_precision(10);
+uz_set_precision(5);
 $result = uz_tax($amount, $taxType, $taxValue);
 
 print_r($result);
