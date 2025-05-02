@@ -19,7 +19,7 @@ if (!function_exists('uz_tax')) {
         if (is_string($taxAmountType)) {
             $taxAmountType = TaxAmountType::tryFrom($taxAmountType);
             if (!$taxAmountType) {
-                throw new \InvalidArgumentException("A valid TaxAmount Type must be provided: $taxAmount");
+                throw new \InvalidArgumentException("Invalid tax type: $taxAmount");
             }
         }
 
@@ -38,7 +38,7 @@ if (!function_exists('uz_tax')) {
                 throw new \InvalidArgumentException("Invalid tax type: {$taxAmountType->value}");
         }
 
-        $amountAfterTax = uz_add($amount, $tax);
+        $amountAfterTax = bcadd($amount, $tax, $UZ_CALCULATION_PRECISION);
 
         return [
             'amount' => uz_round($amount),
@@ -63,7 +63,7 @@ if (!function_exists('uz_discount')) {
         if (is_string($discountAmountType)) {
             $discountAmountType = DiscountAmountType::tryFrom($discountAmountType);
             if (!$discountAmountType) {
-                throw new \InvalidArgumentException('Discount Amount is not a valid discount amount type.');
+                throw new \InvalidArgumentException("Invalid discount type: $discountAmount");
             }
         }
 
@@ -82,7 +82,7 @@ if (!function_exists('uz_discount')) {
                 throw new \InvalidArgumentException("Invalid discount type: {$discountAmountType->value}");
         }
 
-        $amountAfterDiscount = bcsub($amount, $discount);
+        $amountAfterDiscount = bcsub($amount, $discount, $UZ_CALCULATION_PRECISION);
 
         return [
             'amount' => uz_round($amount),
@@ -90,6 +90,7 @@ if (!function_exists('uz_discount')) {
             'after_discount' => uz_round($amountAfterDiscount)
         ];
     }
+
 }
 
 if (!function_exists('uz_split')) {
