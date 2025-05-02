@@ -4,7 +4,7 @@ namespace Usmanzahid\MoneyUtils\Enums\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../src/utils.php';
+require_once __DIR__ . '/../src/financial.php';
 
 class MainTest extends TestCase {
     public function testSubCaseOne() {
