@@ -43,3 +43,10 @@ uz_set_precision_auto($testAmountsForPrecision[0], ...$testAmountsForPrecision);
 
 print_r(uz_tax($amount, $taxType, $taxValue));
 
+
+/// -------------------------------------------------------------------------
+
+echo "\n=== Split test ===\n";
+
+uz_set_precision(2);
+print_r(uz_split("100.00", 3));

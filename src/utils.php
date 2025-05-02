@@ -232,3 +232,40 @@ if (!function_exists('uz_discount')) {
         ];
     }
 }
+
+if (!function_exists('uz_split')) {
+    /**
+     * Splits a monetary amount into equal parts with rounding compensation.
+     *
+     * Ensures the total of all parts equal the original amount by distributing
+     * the smallest possible unit of the remainder across the first few parts.
+     *
+     * @param string $amount The total amount to split (e.g., '10.00').
+     * @param int $parts The number of parts to split the amount into.
+     *
+     * @return string[]       Array of string values representing the split parts.
+     */
+
+    function uz_split(string $amount, int $parts): array {
+        global $UZ_ROUNDING_PRECISION;
+
+        $floorPart = bcdiv($amount, (string)$parts, $UZ_ROUNDING_PRECISION);
+        $floorTotal = bcmul($floorPart, (string)$parts, $UZ_ROUNDING_PRECISION);
+        $remainder = bcsub($amount, $floorTotal, $UZ_ROUNDING_PRECISION);
+
+        // Make the base array
+        $result = array_fill(0, $parts, $floorPart);
+
+        // Distribute remainder
+        $unit = bcpow('10', (string)-$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION);
+        $remaindersToAdd = bcdiv($remainder, $unit);
+
+        // Add the remainders to parts
+        for ($i = 0; $i < $remaindersToAdd; $i++) {
+            $result[$i] = bcadd($result[$i], $unit, $UZ_ROUNDING_PRECISION);
+        }
+
+        return $result;
+    }
+}
+
