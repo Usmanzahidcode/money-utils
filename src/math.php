@@ -199,7 +199,14 @@ if (!function_exists('uz_negate')) {
      * @return string
      */
     function uz_negate(string $amount): string {
-        return bccomp($amount, '0', 6) < 0 ? ltrim($amount, '-'):'-' . $amount;
+        global $UZ_CALCULATION_PRECISION;
+
+        if (bccomp($amount, '0', $UZ_CALCULATION_PRECISION)===0) {
+            return '0.00';
+        }
+
+        return (str_starts_with($amount, '-')) ? ltrim($amount, '-'):'-' . $amount;
     }
+
 
 }
