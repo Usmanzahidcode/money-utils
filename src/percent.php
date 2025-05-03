@@ -3,6 +3,10 @@
 if (!function_exists('uz_percent_of')) {
     /**
      * Calculates X% of Y (e.g., 10% of 200 = 20).
+     *
+     * @param string $amount
+     * @param string $percent
+     * @return string
      */
     function uz_percent_of(string $amount, string $percent): string {
         global $UZ_CALCULATION_PRECISION;
@@ -17,6 +21,10 @@ if (!function_exists('uz_percent_of')) {
 if (!function_exists('uz_percent_ratio')) {
     /**
      * Calculates what percent X is of Y (e.g., 20 is what % of 200? = 10%).
+     *
+     * @param string $part
+     * @param string $total
+     * @return string
      */
     function uz_percent_ratio(string $part, string $total): string {
         global $UZ_CALCULATION_PRECISION;
@@ -35,6 +43,10 @@ if (!function_exists('uz_percent_ratio')) {
 if (!function_exists('uz_percent_increase')) {
     /**
      * Increases a value by X% (e.g., 200 + 10% = 220).
+     *
+     * @param string $base
+     * @param string $percent
+     * @return string
      */
     function uz_percent_increase(string $base, string $percent): string {
         global $UZ_CALCULATION_PRECISION;
@@ -50,6 +62,10 @@ if (!function_exists('uz_percent_increase')) {
 if (!function_exists('uz_percent_decrease')) {
     /**
      * Decreases a value by X% (e.g., 200 - 10% = 180).
+     *
+     * @param string $base
+     * @param string $percent
+     * @return string
      */
     function uz_percent_decrease(string $base, string $percent): string {
         global $UZ_CALCULATION_PRECISION;
