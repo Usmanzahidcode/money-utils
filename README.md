@@ -18,7 +18,8 @@ If you're building a system with USD calculations (e.g., subscriptions, checkout
 - Helpers for tax and discount calculations
 - Currency-agnostic: works with any decimal-based currency
 
-_**Note:** This package only supports decimal amounts (e.g., 10.00) and does not handle cent-based implementations. This design choice was intentional, as cent-based
+_**Note:** This package only supports decimal amounts (e.g., 10.00) and does not handle cent-based implementations. This design choice was intentional, as
+cent-based
 support was not within the original scope of development._
 
 ### Installation
@@ -26,6 +27,8 @@ support was not within the original scope of development._
 ```bash
 composer require usmanzahid/money-utils
 ```
+
+_**Note:** Make sure to set the precision at the start._
 
 ### Methods
 
