@@ -1,6 +1,5 @@
 <?php declare(strict_types=1);
 
-
 if (!function_exists('uz_add')) {
     /**
      * Adds two numbers with high precision and rounding.
@@ -79,6 +78,8 @@ if (!function_exists('uz_round')) {
      */
     function uz_round(string $amount): string {
         global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
+
+        var_dump("The rounding precision insdie the rounding method is:", $UZ_ROUNDING_PRECISION);
 
         // Resolve the adjustment amount to handle rounding.
         $adjustment = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);

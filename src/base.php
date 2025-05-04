@@ -7,12 +7,6 @@
 // TODO: in the money utils make sure the tax and discount method round properly and not prematurely.
 
 
-// Default calculation precision
-$UZ_CALCULATION_PRECISION = 6;
-
-// Default precision for the final amounts (suitable for USD and most currencies)
-$UZ_ROUNDING_PRECISION = 2;
-
 if (!function_exists('uz_set_precision_auto')) {
     /**
      * Set the precision for the final results. This depends on what are you working with?

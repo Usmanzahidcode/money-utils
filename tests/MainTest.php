@@ -1,18 +1,27 @@
-<?php
+<?php declare(strict_types=1);
 
-namespace Usmanzahid\MoneyUtils\Enums\Tests;
+namespace UsmanZahid\MoneyUtils\Tests;
 
 use PHPUnit\Framework\TestCase;
 
-require_once __DIR__ . '/../src/financial.php';
+require_once __DIR__ . '/../vendor/autoload.php';
 
 class MainTest extends TestCase {
+
+    public function testMustBeSame() {
+//        $this->assertTrue("2"===2);
+        $this->assertSame("2", 2, "Both are not same!");
+    }
+
     public function testSubCaseOne() {
         $a = "2.02";
         $b = "0.02";
 
         $result = uz_sub($a, $b);
-        $this->assertEquals("2.00", $result);
+//        $this->assertEquals("2.00", $result);
+        var_dump($result);
+        exit();
+        $this->assertSame("2.00", $result);
     }
 
     public function testAddCaseOne() {

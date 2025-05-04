@@ -13,7 +13,10 @@
       "UsmanZahid\\MoneyUtils\\Tests\\": "tests/"
     },
     "files": [
-      "src/financial.php"
+      "src/base.php",
+      "src/financial.php",
+      "src/math.php",
+      "src/percent.php"
     ]
   },
   "authors": [
