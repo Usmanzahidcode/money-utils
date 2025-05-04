@@ -79,8 +79,6 @@ if (!function_exists('uz_round')) {
     function uz_round(string $amount): string {
         global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
 
-        var_dump("The rounding precision insdie the rounding method is:", $UZ_ROUNDING_PRECISION);
-
         // Resolve the adjustment amount to handle rounding.
         $adjustment = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
         $adjustment = bcdiv($adjustment, '2', $UZ_ROUNDING_PRECISION + 2);
@@ -112,7 +110,7 @@ if (!function_exists('uz_max')) {
                 $max = $amount;
             }
         }
-        return $max;
+        return uz_round($max);
     }
 }
 
@@ -133,7 +131,7 @@ if (!function_exists('uz_min')) {
                 $min = $amount;
             }
         }
-        return $min;
+        return uz_round($min);
     }
 }
 
@@ -176,7 +174,8 @@ if (!function_exists('uz_sum')) {
         foreach ($amounts as $amount) {
             $sum = bcadd($sum, $amount, $UZ_CALCULATION_PRECISION);
         }
-        return $sum;
+
+        return uz_round($sum);
     }
 }
 

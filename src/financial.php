@@ -19,7 +19,7 @@ if (!function_exists('uz_tax')) {
         if (is_string($taxAmountType)) {
             $taxAmountType = TaxAmountType::tryFrom($taxAmountType);
             if (!$taxAmountType) {
-                throw new \InvalidArgumentException("Invalid tax type: $taxAmount");
+                throw new \InvalidArgumentException("Invalid tax type given!");
             }
         }
 
@@ -63,7 +63,7 @@ if (!function_exists('uz_discount')) {
         if (is_string($discountAmountType)) {
             $discountAmountType = DiscountAmountType::tryFrom($discountAmountType);
             if (!$discountAmountType) {
-                throw new \InvalidArgumentException("Invalid discount type: $discountAmount");
+                throw new \InvalidArgumentException("Invalid discount type given!");
             }
         }
 
@@ -108,6 +108,10 @@ if (!function_exists('uz_split')) {
 
     function uz_split(string $amount, int $parts): array {
         global $UZ_ROUNDING_PRECISION;
+
+        if ($parts <= 0) {
+            throw new \InvalidArgumentException("Number of parts must be greater than zero.");
+        }
 
         $floorPart = bcdiv($amount, (string) $parts, $UZ_ROUNDING_PRECISION);
         $floorTotal = bcmul($floorPart, (string) $parts, $UZ_ROUNDING_PRECISION);
