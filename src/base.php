@@ -2,7 +2,7 @@
 
 // TODO: isnpired by the recent encryption lib mention that fact that staying away form the roundign is not magic...
 
-// TODO: Finalize the documentation with the final touch, personal tone and proper brick/money reference.
+// TODO: Finalize the documentation with the final touch, personal tone and proper (more subtle, mentioning hte missing things and differences) brick/money reference.
 
 // TODO: in the money utils make sure the tax and discount method round properly and not prematurely.
 
