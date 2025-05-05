@@ -6,14 +6,7 @@ Thank you for your interest in contributing to this project!
 
 1. **Fork the repository**
 2. **Clone your fork locally**:
-   ```bash
-   git clone https://github.com/your-username/money-utils.git
-   cd money-utils
-   ```
-3. Install dependencies:
-   ```bash
-   composer install
-   ```
+3. Install dependencies with composer `composer install`
 
 ## Code Standards
 - Follow PSR-12 coding style.
