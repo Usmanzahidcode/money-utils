@@ -1,11 +1,5 @@
 <?php declare(strict_types=1);
 
-// TODO: isnpired by the recent encryption lib mention that fact that staying away form the roundign is not magic...
-
-// TODO: Finalize the documentation with the final touch, personal tone and proper (more subtle, mentioning hte missing things and differences) brick/money reference.
-
-// TODO: in the money utils make sure the tax and discount method round properly and not prematurely.
-
 
 if (!function_exists('uz_set_precision_auto')) {
     /**
@@ -44,7 +38,7 @@ if (!function_exists('uz_set_precision')) {
         $UZ_ROUNDING_PRECISION = $precision;
 
         // Set the calculation precision based on the rounding precision
-        $guardDigits = max(4, (int) ceil($UZ_ROUNDING_PRECISION * 0.3));
+        $guardDigits = max(4, (int)ceil($UZ_ROUNDING_PRECISION * 0.3));
         $UZ_CALCULATION_PRECISION = $UZ_ROUNDING_PRECISION + $guardDigits;
     }
 }
