@@ -113,15 +113,15 @@ if (!function_exists('uz_split')) {
             throw new \InvalidArgumentException("Number of parts must be greater than zero.");
         }
 
-        $floorPart = bcdiv($amount, (string) $parts, $UZ_ROUNDING_PRECISION);
-        $floorTotal = bcmul($floorPart, (string) $parts, $UZ_ROUNDING_PRECISION);
+        $floorPart = bcdiv($amount, (string)$parts, $UZ_ROUNDING_PRECISION);
+        $floorTotal = bcmul($floorPart, (string)$parts, $UZ_ROUNDING_PRECISION);
         $remainder = bcsub($amount, $floorTotal, $UZ_ROUNDING_PRECISION);
 
         // Make the base array
         $result = array_fill(0, $parts, $floorPart);
 
         // Distribute remainder
-        $unit = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION);
+        $unit = bcpow('10', (string)-$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION);
         $remaindersToAdd = bcdiv($remainder, $unit);
 
         // Add the remainders to parts
