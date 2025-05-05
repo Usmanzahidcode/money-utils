@@ -234,4 +234,22 @@ if (!function_exists('uz_negate')) {
         }
     }
 
+    if (!function_exists('uz_is_between')) {
+        /**
+         * Check if an amount is between the given amounts.
+         *
+         * @param string $value
+         * @param string $min
+         * @param string $max
+         * @return bool
+         */
+        function uz_is_between(string $value, string $min, string $max): bool {
+            global $UZ_ROUNDING_PRECISION;
+
+            return bccomp($value, $min, $UZ_ROUNDING_PRECISION) >= 0
+                && bccomp($value, $max, $UZ_ROUNDING_PRECISION) <= 0;
+        }
+
+    }
+
 }
