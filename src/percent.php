@@ -26,10 +26,10 @@ if (!function_exists('uz_percent_ratio')) {
      * @param string $total
      * @return string
      */
-    function uz_percent_ratio(string $part, string $total): string {
+    function uz_percent_ratio(string $total, string $part): string {
         global $UZ_CALCULATION_PRECISION;
 
-        if ($total==='0') {
+        if ($total === '0') {
             throw new \InvalidArgumentException('Cannot divide by zero in percent ratio.');
         }
 

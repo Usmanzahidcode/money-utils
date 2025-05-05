@@ -60,7 +60,7 @@ if (!function_exists('uz_div')) {
     function uz_div(string $amountA, string $amountB): string {
         global $UZ_CALCULATION_PRECISION;
 
-        if (bccomp($amountB, '0', $UZ_CALCULATION_PRECISION)===0) {
+        if (bccomp($amountB, '0', $UZ_CALCULATION_PRECISION) === 0) {
             throw new \InvalidArgumentException('Division by zero.');
         }
 
@@ -80,7 +80,7 @@ if (!function_exists('uz_round')) {
         global $UZ_CALCULATION_PRECISION, $UZ_ROUNDING_PRECISION;
 
         // Resolve the adjustment amount to handle rounding.
-        $adjustment = bcpow('10', (string) -$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
+        $adjustment = bcpow('10', (string)-$UZ_ROUNDING_PRECISION, $UZ_ROUNDING_PRECISION + 2);
         $adjustment = bcdiv($adjustment, '2', $UZ_ROUNDING_PRECISION + 2);
 
         // Adjust the amount based on the rounding logic.
@@ -145,7 +145,7 @@ if (!function_exists('uz_average')) {
     function uz_average(string ...$amounts): string {
         global $UZ_CALCULATION_PRECISION;
 
-        if (count($amounts)===0) {
+        if (count($amounts) === 0) {
             throw new \InvalidArgumentException('At least one amount is required to calculate average.');
         }
 
@@ -154,7 +154,7 @@ if (!function_exists('uz_average')) {
             $sum = bcadd($sum, $amount, $UZ_CALCULATION_PRECISION);
         }
 
-        $average = bcdiv($sum, (string) count($amounts), $UZ_CALCULATION_PRECISION);
+        $average = bcdiv($sum, (string)count($amounts), $UZ_CALCULATION_PRECISION);
 
         return uz_round($average);
     }
@@ -201,12 +201,37 @@ if (!function_exists('uz_negate')) {
     function uz_negate(string $amount): string {
         global $UZ_CALCULATION_PRECISION;
 
-        if (bccomp($amount, '0', $UZ_CALCULATION_PRECISION)===0) {
+        if (bccomp($amount, '0', $UZ_CALCULATION_PRECISION) === 0) {
             return '0.00';
         }
 
-        return (str_starts_with($amount, '-')) ? ltrim($amount, '-'):'-' . $amount;
+        return (str_starts_with($amount, '-')) ? ltrim($amount, '-') : '-' . $amount;
     }
 
+    if (!function_exists('uz_compare')) {
+        /**
+         * Compares two numbers with the precision provided.
+         *
+         * @param string $amount1
+         * @param string $amount2
+         * @return int -1 if amount1 < amount2, 0 if equal, 1 if amount1 > amount2
+         */
+        function uz_compare(string $amount1, string $amount2): int {
+            global $UZ_ROUNDING_PRECISION;
+            return bccomp($amount1, $amount2, $UZ_ROUNDING_PRECISION);
+        }
+    }
+
+    if (!function_exists('uz_is_valid_amount')) {
+        /**
+         * Validates if a string is a valid numeric value.
+         *
+         * @param mixed $value
+         * @return bool
+         */
+        function uz_is_valid_amount(string $value): bool {
+            return is_numeric($value) && preg_match('/^-?\d+(\.\d+)?$/', (string)$value);
+        }
+    }
 
 }

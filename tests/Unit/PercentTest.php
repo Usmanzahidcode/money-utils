@@ -26,19 +26,19 @@ class PercentTest extends TestCase {
     }
 
     public function testPercentRatio(): void {
-        $result = uz_percent_ratio('20', '200');
+        $result = uz_percent_ratio('200', '20');
         $this->assertSame("10.00", $result);
 
-        $result = uz_percent_ratio('50', '1000');
+        $result = uz_percent_ratio('1000', '50');
         $this->assertSame("5.00", $result);
 
-        $result = uz_percent_ratio('10', '50');
+        $result = uz_percent_ratio('50', '10');
         $this->assertSame("20.00", $result);
 
         // Test division by zero (expected exception)
         $this->expectException(\InvalidArgumentException::class);
         $this->expectExceptionMessage('Cannot divide by zero in percent ratio.');
-        uz_percent_ratio('10', '0');
+        uz_percent_ratio('0', '10');
     }
 
     public function testPercentIncrease(): void {

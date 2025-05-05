@@ -13,7 +13,7 @@ class FinanceTest extends TestCase {
 
     public function testTaxCalculationCase1(): void {
         $amount = "100";
-        $taxType = 'percentage';
+        $taxType = 'percent';
         $taxAmount = "10.00";
 
         $taxBreakdown = uz_tax($amount, $taxType, $taxAmount);
@@ -60,7 +60,7 @@ class FinanceTest extends TestCase {
 
     public function testDiscountCalculationCase1(): void {
         $amount = "200";
-        $discountType = 'percentage';
+        $discountType = 'percent';
         $discountAmount = "15.00";
 
         $discountBreakdown = uz_discount($amount, $discountType, $discountAmount);

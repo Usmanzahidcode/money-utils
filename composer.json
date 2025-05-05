@@ -3,8 +3,7 @@
   "description": "A set of utilities for money calculations to be away from rounding errors.",
   "type": "library",
   "require": {
-    "ext-bcmath": "*",
-    "php": "^8.0"
+    "ext-bcmath": "*"
   },
   "license": "MIT",
   "autoload": {

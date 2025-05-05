@@ -21,7 +21,7 @@ uz_set_precision_auto('10.120', '20.1234', '5.1');
 
 ```php
 uz_percent_of('200', '10');           // "20.00"
-uz_percent_ratio('20', '200');        // "10.00"
+uz_percent_ratio('200', '20');        // "10.00"
 uz_percent_increase('200', '10');     // "220.00"
 uz_percent_decrease('200', '10');     // "180.00"
 

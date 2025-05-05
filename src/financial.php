@@ -24,7 +24,7 @@ if (!function_exists('uz_tax')) {
         }
 
         switch ($taxAmountType) {
-            case TaxAmountType::PERCENTAGE:
+            case TaxAmountType::PERCENT:
                 $rate = bcdiv(rtrim($taxAmount, '%'), '100', $UZ_CALCULATION_PRECISION);
                 $tax = bcmul($amount, $rate, $UZ_CALCULATION_PRECISION);
                 break;
@@ -68,7 +68,7 @@ if (!function_exists('uz_discount')) {
         }
 
         switch ($discountAmountType) {
-            case DiscountAmountType::PERCENTAGE:
+            case DiscountAmountType::PERCENT:
                 $rate = bcdiv(rtrim($discountAmount, '%'), '100', $UZ_CALCULATION_PRECISION);
                 $discount = bcmul($amount, $rate, $UZ_CALCULATION_PRECISION);
                 break;
