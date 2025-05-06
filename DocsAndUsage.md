@@ -7,42 +7,51 @@ applications.
 ```php
 require_once 'vendor/autoload.php';
 
-// Set up the precision at the entry point or start of your application for consistency.
+// Set up the precision at the entry point or bootstrapping stage of your application.
 uz_set_precision(2);
 
 // If you have a calculation place where you don't know the precision, then you can pass in all the number that will
 // be used in the calculations and the library will set up the precision automatically to the highest. Useful where
 // precision is not defined.
-uz_set_precision_auto('10.120', '20.1234', '5.1');
+uz_set_precision_auto('10.120', '20.1234', '5.1', ...); // Sets precision to 4
 
 ```
 
 ## Percentage methods
 
 ```php
-uz_percent_of('200', '10');           // "20.00"
-uz_percent_ratio('200', '20');        // "10.00"
-uz_percent_increase('200', '10');     // "220.00"
-uz_percent_decrease('200', '10');     // "180.00"
+uz_percent_of('200', '10');                   // "20.00"
+uz_percent_ratio('200', '20');                // "10.00"
+uz_percent_increase('200', '10');             // "220.00"
+uz_percent_decrease('200', '10');             // "180.00"
 
 ```
 
 ## Arithmetic methods
 
 ```php
-uz_add('10.12', '2.34');              // "12.46"
-uz_sub('10.12', '2.34');              // "7.78"
-uz_mul('10.00', '3.25');              // "32.50"
-uz_div('10.00', '2.00');              // "5.00"
+uz_add('10.12', '2.34');                      // "12.46"
+uz_sub('10.12', '2.34');                      // "7.78"
+uz_mul('10.00', '3.25');                      // "32.50"
+uz_div('10.00', '2.00');                      // "5.00"
 
-uz_max('1.01', '5.99', '3.14');       // "5.99"
-uz_min('1.01', '5.99', '3.14');       // "1.01"
-uz_average('2.00', '4.00', '6.00');   // "4.00"
-uz_sum('1.10', '2.20', '3.30');       // "6.60"
+uz_max('1.01', '5.99', '3.14');               // "5.99"
+uz_min('1.01', '5.99', '3.14');               // "1.01"
+uz_average('2.00', '4.00', '6.00');           // "4.00"
+uz_sum('1.10', '2.20', '3.30');               // "6.60"
 
-uz_absolute('-45.67');               // "45.67"
-uz_negate('45.67');                  // "-45.67"
-uz_negate('-45.67');                 // "45.67"
+uz_absolute('-45.67');                        // "45.67"
+uz_negate('45.67');                           // "-45.67"
+uz_negate('-45.67');                          // "45.67"
+
+uz_compare("1.02", "1.03");                   // -1
+uz_compare("1.03", "1.03");                   //  0
+uz_compare("1.04", "1.03");                   //  1
+
+uz_is_valid_amount("56.r4");                  // false
+uz_is_valid_amount("45.65");                  // true
+
+uz_is_between("54.62", "0.00", "100.00");     // true
 
 ```
 
@@ -51,7 +60,7 @@ uz_negate('-45.67');                 // "45.67"
 Used mostly internally by the library, but you may use it if needed rather than manually rounding.
 
 ```php
-uz_round('12.3456');                  // "12.35" (assuming 2 precision)
+uz_round('12.3456');                          // "12.35" (assuming 2 precision)
 ```
 
 ## Tax, Discount & discount
