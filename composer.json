@@ -1,15 +1,15 @@
 {
   "name": "usmanzahid/money-utils",
-  "description": "A set of utilities for money calculations to be away from rounding errors.",
+  "description": "A utility library for accurate and consistent money calculations in PHP without rounding errors.",
   "type": "library",
   "require": {
+    "php": ">=8.1",
     "ext-bcmath": "*"
   },
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Usmanzahid\\MoneyUtils\\": "src/",
-      "UsmanZahid\\MoneyUtils\\Tests\\": "tests/"
+      "Usmanzahid\\MoneyUtils\\": "src/"
     },
     "files": [
       "src/base.php",
@@ -17,6 +17,11 @@
       "src/math.php",
       "src/percent.php"
     ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "UsmanZahid\\MoneyUtils\\Tests\\": "tests/"
+    }
   },
   "authors": [
     {
