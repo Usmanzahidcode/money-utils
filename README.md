@@ -1,10 +1,8 @@
 # Financial Calculations Utilities
 
 [![Build Status](https://github.com/usmanzahidcode/money-utils/actions/workflows/tests.yml/badge.svg)](https://github.com/usmanzahidcode/money-utils)
-
-[//]: # ([![Latest Stable Version]&#40;https://img.shields.io/packagist/v/laravel/sanctum&#41;]&#40;https://packagist.org/packages/laravel/sanctum&#41;)
-
-[//]: # ([![License]&#40;https://img.shields.io/packagist/l/laravel/sanctum&#41;]&#40;https://packagist.org/packages/laravel/sanctum&#41;)
+[![Latest Stable Version](https://img.shields.io/packagist/v/usmanzahid/money-utils)](https://packagist.org/packages/usmanzahid/money-utils)
+[![License](https://img.shields.io/packagist/l/usmanzahid/money-utils)](https://packagist.org/packages/usmanzahid/money-utils)
 
 A minimalist utility library for **precise**, **reliable**, and **configurable** financial computations.  
 Built specifically for financial workflows where **rounding accuracy** and **consistency** matter most.
